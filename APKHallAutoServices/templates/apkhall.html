@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>无线大厅APK网页版服务</title>
+</head>
+<body>
+    <div id="container" style="width:100%">
+
+        <div id="header" style="background-color:#6699FF;height:100%;">
+            <h1 style="margin-bottom:0;margin-top:0;text-align:center">无线大厅自动化</h1>
+        </div>
+
+        <div id="menu" style="background-color:#33CCCC;height:840px;width:10%;float:left;">
+            <hr />
+            <div style="margin-top:15px;text-align:center"><b>UI自动化</b><br></div>
+            <hr />
+            <div style="margin-top:15px;text-align:center"><b>性能分析工具</b><br></div>
+            <hr />
+        </div>
+
+        <div id="content" style="background-color:#F8F8F8;height:840px;width:90%;float:left;">
+            <div style="margin-top:30px;margin-left:30px">
+            <hr />
+            <form method="post" action="/adb/">
+                {% csrf_token %}
+                <input type="submit" value="测试手机连接" />
+            </form>
+            <p style="color:#FF3333">{{rlc}}</p>
+            <hr />
+            <form enctype="multipart/form-data" action="/uploadFile/" method="post">
+                {% csrf_token %}
+                <p style="font-weight:bold">请先选择文件后，再点击上传测试APK文件</p>
+               <input type="file" name="myfile"/>
+               <input type="submit" value="上传测试APK文件" id="submmitbtn" onclick="MsgBox()"/>
+            </form>
+            <p style="color:#FF3333">{{rlt}}</p>
+            <hr />
+            <form action="/list/" method="POST">
+                {% csrf_token %}
+                <p style="font-weight:bold">勾选需要执行的模块</p>
+                <input type="checkbox" value="1" name="check_box_list"/>权限点击及实名认证<br/>
+                <input type="checkbox" value="3" name="check_box_list"/>大厅我模块<br/>
+                <input type="checkbox" value="4" name="check_box_list"/>第三方登录及分享(注意：此部分的Case需要测试机QQ、微信及支付宝登录状态正常)<br/>
+                 <input type="checkbox" value="2" name="check_box_list"/>发现模块消息界面相关功能<br/>
+                <input type="checkbox" value="5" name="check_box_list"/>全游戏下载，进入验证<br/>
+                <hr />
+                <p style="font-weight:bold">请输入接收测试报告的邮箱</p>
+                <input type="text" name="firstname"  placeholder="例如：xuelin@mail.jj.cn">
+                <input type="submit" value="开始执行" style="height:40px;width:80px;display:inline-block;font-weight:bold"/>
+            </form>
+            </div>
+        </div>
+        <div id="footer" style="background-color:#33FFCC;height:10%;clear:both;text-align:center;">
+            版权 © 自动化小组
+        </div>
+
+    </div>
+</body>
+</html>
